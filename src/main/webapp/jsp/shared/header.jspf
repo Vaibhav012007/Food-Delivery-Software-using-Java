@@ -1,0 +1,69 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<nav class="navbar">
+
+	<!-- LOGO → HOME -->
+	<a class="logo-brand" href="${pageContext.request.contextPath}/"> <img
+		src="${pageContext.request.contextPath}/assets/images/app_logo.png"
+		alt="FoodXpress" class="app-logo"
+		onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerText='FoodXpress';" />
+		<span class="brand-text">FoodXpress</span>
+
+	</a>
+
+	<div class="navbar-links">
+
+		<a href="${pageContext.request.contextPath}/restaurant?action=list">
+			Restaurants </a>
+		<a href="${pageContext.request.contextPath}/groupOrder">
+			Group Orders </a>
+		<a href="${pageContext.request.contextPath}/surplus">
+			Surplus Food </a>
+		<a href="${pageContext.request.contextPath}/orderHistory">
+			My Orders </a>
+
+		<c:if test="${sessionScope.loggedUser.role eq 'admin'}">
+			<a href="${pageContext.request.contextPath}/jsp/admin/dashboard.jsp" style="color:var(--primary);font-weight:600">
+				Admin </a>
+		</c:if>
+
+		<!-- CART ICON -->
+		<a href="${pageContext.request.contextPath}/cart" class="cart-link">
+			<img src="${pageContext.request.contextPath}/assets/images/cart.svg"
+			alt="Cart" class="cart-icon"  title="View Cart"/>
+		</a>
+
+
+		<c:choose>
+
+			<c:when test="${not empty sessionScope.loggedUser}">
+
+				<a href="${pageContext.request.contextPath}/jsp/customer/home.jsp">
+					Home </a>
+
+				<a
+					href="${pageContext.request.contextPath}/jsp/customer/profile.jsp">
+					My Profile </a>
+
+				<a class="nav-btn"
+					href="${pageContext.request.contextPath}/user?action=logout">
+					Logout </a>
+
+			</c:when>
+
+			<c:otherwise>
+
+				<a class="nav-btn"
+					href="${pageContext.request.contextPath}/user?action=login">
+					Login </a>
+
+				<a class="nav-btn"
+					href="${pageContext.request.contextPath}/user?action=register">
+					Register </a>
+
+			</c:otherwise>
+
+		</c:choose>
+
+	</div>
+</nav>

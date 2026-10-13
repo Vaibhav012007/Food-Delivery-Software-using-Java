@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.app.desktop.MenuManagementController"
+      spacing="0" stylesheets="@../css/desktop.css">
+
+    <!-- Top Navigation Bar -->
+    <HBox styleClass="nav-bar">
+        <Label text="FoodXpress Admin" styleClass="brand-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Dashboard" styleClass="nav-button" onAction="#goDashboard"/>
+        <Button text="Restaurants" styleClass="nav-button" onAction="#goRestaurants"/>
+        <Button text="Menus" styleClass="nav-button" onAction="#goMenus"/>
+        <Button text="Orders" styleClass="nav-button" onAction="#goOrders"/>
+        <Button text="Batches" styleClass="nav-button" onAction="#goBatches"/>
+        <Button text="Surplus" styleClass="nav-button" onAction="#goSurplus"/>
+        <Button text="Group Orders" styleClass="nav-button" onAction="#goGroupOrders"/>
+        <Button text="Sign Out" styleClass="btn-secondary" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="20" right="24" bottom="20" left="24"/>
+        </padding>
+
+        <!-- Left Table -->
+        <VBox spacing="12" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label text="Menu &amp; Inventory" styleClass="page-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Filter by Restaurant:"/>
+                <ComboBox fx:id="restaurantFilter" prefWidth="200" onAction="#filterChanged"/>
+                <Button text="🔄 Refresh" onAction="#loadMenuItems" styleClass="btn-secondary"/>
+                <Button text="Toggle Availability" onAction="#handleToggleAvailability" styleClass="btn-secondary"/>
+                <Button text="🗑️ Delete" onAction="#handleDelete" styleClass="btn-danger"/>
+            </HBox>
+
+            <TableView fx:id="menuTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="idCol" text="ID" prefWidth="45"/>
+                    <TableColumn fx:id="nameCol" text="Item Name" prefWidth="180"/>
+                    <TableColumn fx:id="categoryCol" text="Category" prefWidth="120"/>
+                    <TableColumn fx:id="priceCol" text="Price (₹)" prefWidth="80"/>
+                    <TableColumn fx:id="vegCol" text="Veg?" prefWidth="60"/>
+                    <TableColumn fx:id="availableCol" text="Available" prefWidth="80"/>
+                    <TableColumn fx:id="stockCol" text="Stock Qty" prefWidth="80"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <!-- Right Form to Add Menu Item -->
+        <VBox styleClass="card" spacing="12" prefWidth="300">
+            <Label text="Add Menu Item" styleClass="section-title"/>
+            <Label fx:id="statusMessage" text="" wrapText="true" visible="false"/>
+
+            <VBox spacing="4">
+                <Label text="Item Name:"/>
+                <TextField fx:id="itemNameInput" promptText="e.g. Butter Paneer"/>
+            </VBox>
+
+            <VBox spacing="4">
+                <Label text="Category:"/>
+                <TextField fx:id="categoryInput" promptText="e.g. Main Course"/>
+            </VBox>
+
+            <HBox spacing="10">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Price (₹):"/>
+                    <TextField fx:id="priceInput" promptText="220.00"/>
+                </VBox>
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Stock Qty:"/>
+                    <TextField fx:id="stockInput" text="50"/>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="16">
+                <CheckBox fx:id="isVegCheckbox" text="Vegetarian" selected="true"/>
+                <CheckBox fx:id="isAvailableCheckbox" text="Available" selected="true"/>
+            </HBox>
+
+            <Button text="+ Add Item" onAction="#handleAddItem" styleClass="btn-primary" maxWidth="Infinity"/>
+        </VBox>
+    </HBox>
+</VBox>

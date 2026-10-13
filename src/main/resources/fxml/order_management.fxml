@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.app.desktop.OrderManagementController"
+      spacing="0" stylesheets="@../css/desktop.css">
+
+    <!-- Top Navigation Bar -->
+    <HBox styleClass="nav-bar">
+        <Label text="FoodXpress Admin" styleClass="brand-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Dashboard" styleClass="nav-button" onAction="#goDashboard"/>
+        <Button text="Restaurants" styleClass="nav-button" onAction="#goRestaurants"/>
+        <Button text="Menus" styleClass="nav-button" onAction="#goMenus"/>
+        <Button text="Orders" styleClass="nav-button" onAction="#goOrders"/>
+        <Button text="Batches" styleClass="nav-button" onAction="#goBatches"/>
+        <Button text="Surplus" styleClass="nav-button" onAction="#goSurplus"/>
+        <Button text="Group Orders" styleClass="nav-button" onAction="#goGroupOrders"/>
+        <Button text="Sign Out" styleClass="btn-secondary" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="20" right="24" bottom="20" left="24"/>
+        </padding>
+
+        <!-- Orders Table -->
+        <VBox spacing="12" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label text="Order Dispatch &amp; State Machine" styleClass="page-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Status Filter:"/>
+                <ComboBox fx:id="statusFilterCombo" prefWidth="160" onAction="#filterChanged"/>
+                <Button text="🔄 Refresh" onAction="#loadOrders" styleClass="btn-secondary"/>
+            </HBox>
+
+            <TableView fx:id="orderTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="idCol" text="Order ID" prefWidth="70"/>
+                    <TableColumn fx:id="userCol" text="User ID" prefWidth="70"/>
+                    <TableColumn fx:id="restaurantCol" text="Restaurant ID" prefWidth="90"/>
+                    <TableColumn fx:id="amountCol" text="Amount (₹)" prefWidth="90"/>
+                    <TableColumn fx:id="statusCol" text="Current Status" prefWidth="130"/>
+                    <TableColumn fx:id="dateCol" text="Date Placed" prefWidth="160"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <!-- Right Side: Order State Transition Panel -->
+        <VBox styleClass="card" spacing="16" prefWidth="320">
+            <Label text="State Machine Transition" styleClass="section-title"/>
+            <Label fx:id="statusMessage" text="" wrapText="true" visible="false"/>
+
+            <VBox spacing="4">
+                <Label text="Selected Order:"/>
+                <Label fx:id="selectedOrderLabel" text="None selected" style="-fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+            </VBox>
+
+            <VBox spacing="4">
+                <Label text="Current State:"/>
+                <Label fx:id="currentStateLabel" text="-" style="-fx-font-size: 14px; -fx-text-fill: #ff7b00; -fx-font-weight: bold;"/>
+            </VBox>
+
+            <VBox spacing="4">
+                <Label text="Transition to:"/>
+                <ComboBox fx:id="nextStatusCombo" prefWidth="280"/>
+            </VBox>
+
+            <Button text="Execute Transition" onAction="#handleStatusTransition" styleClass="btn-primary" maxWidth="Infinity"/>
+
+            <Separator/>
+
+            <Label text="Order Items" styleClass="section-title"/>
+            <ListView fx:id="orderItemsList" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </HBox>
+</VBox>

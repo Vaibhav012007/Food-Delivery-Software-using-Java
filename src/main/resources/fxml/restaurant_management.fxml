@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.app.desktop.RestaurantManagementController"
+      spacing="0" stylesheets="@../css/desktop.css">
+
+    <!-- Top Navigation Bar -->
+    <HBox styleClass="nav-bar">
+        <Label text="FoodXpress Admin" styleClass="brand-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Dashboard" styleClass="nav-button" onAction="#goDashboard"/>
+        <Button text="Restaurants" styleClass="nav-button" onAction="#goRestaurants"/>
+        <Button text="Menus" styleClass="nav-button" onAction="#goMenus"/>
+        <Button text="Orders" styleClass="nav-button" onAction="#goOrders"/>
+        <Button text="Batches" styleClass="nav-button" onAction="#goBatches"/>
+        <Button text="Surplus" styleClass="nav-button" onAction="#goSurplus"/>
+        <Button text="Group Orders" styleClass="nav-button" onAction="#goGroupOrders"/>
+        <Button text="Sign Out" styleClass="btn-secondary" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="20" right="24" bottom="20" left="24"/>
+        </padding>
+
+        <!-- Left Table -->
+        <VBox spacing="12" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label text="Restaurants Directory" styleClass="page-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="🔄 Refresh" onAction="#loadRestaurants" styleClass="btn-secondary"/>
+                <Button text="🗑️ Delete Selected" onAction="#handleDelete" styleClass="btn-danger"/>
+            </HBox>
+
+            <TableView fx:id="restaurantTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="idCol" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="nameCol" text="Name" prefWidth="180"/>
+                    <TableColumn fx:id="cuisineCol" text="Cuisine" prefWidth="120"/>
+                    <TableColumn fx:id="addressCol" text="Address" prefWidth="180"/>
+                    <TableColumn fx:id="ratingCol" text="Rating" prefWidth="70"/>
+                    <TableColumn fx:id="timeCol" text="Delivery (min)" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <!-- Right Form to Add Restaurant -->
+        <VBox styleClass="card" spacing="12" prefWidth="320">
+            <Label text="Add New Restaurant" styleClass="section-title"/>
+            <Label fx:id="statusMessage" text="" wrapText="true" visible="false"/>
+
+            <VBox spacing="4">
+                <Label text="Restaurant Name:"/>
+                <TextField fx:id="nameInput" promptText="e.g. Royal Biryani"/>
+            </VBox>
+
+            <VBox spacing="4">
+                <Label text="Cuisine Type:"/>
+                <TextField fx:id="cuisineInput" promptText="e.g. Indian, Mughlai"/>
+            </VBox>
+
+            <VBox spacing="4">
+                <Label text="Address:"/>
+                <TextField fx:id="addressInput" promptText="e.g. Hostel 4 Food Court"/>
+            </VBox>
+
+            <HBox spacing="10">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Rating (0-5):"/>
+                    <TextField fx:id="ratingInput" text="4.2"/>
+                </VBox>
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Delivery Time:"/>
+                    <TextField fx:id="deliveryTimeInput" text="25"/>
+                </VBox>
+            </HBox>
+
+            <Button text="+ Add Restaurant" onAction="#handleAddRestaurant" styleClass="btn-primary" maxWidth="Infinity"/>
+        </VBox>
+    </HBox>
+</VBox>

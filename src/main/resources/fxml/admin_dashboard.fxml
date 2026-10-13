@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.app.desktop.AdminDashboardController"
+      spacing="0" stylesheets="@../css/desktop.css">
+
+    <!-- Top Navigation Bar -->
+    <HBox styleClass="nav-bar">
+        <Label text="FoodXpress Admin" styleClass="brand-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Dashboard" styleClass="nav-button" onAction="#goDashboard"/>
+        <Button text="Restaurants" styleClass="nav-button" onAction="#goRestaurants"/>
+        <Button text="Menus" styleClass="nav-button" onAction="#goMenus"/>
+        <Button text="Orders" styleClass="nav-button" onAction="#goOrders"/>
+        <Button text="Batches" styleClass="nav-button" onAction="#goBatches"/>
+        <Button text="Surplus" styleClass="nav-button" onAction="#goSurplus"/>
+        <Button text="Group Orders" styleClass="nav-button" onAction="#goGroupOrders"/>
+        <Button text="Sign Out" styleClass="btn-secondary" onAction="#handleLogout"/>
+    </HBox>
+
+    <!-- Main Content Area -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+        <VBox spacing="24">
+            <padding>
+                <Insets top="24" right="32" bottom="24" left="32"/>
+            </padding>
+
+            <VBox spacing="4">
+                <Label text="System Overview" styleClass="page-title"/>
+                <Label fx:id="welcomeLabel" text="Welcome to FoodXpress Administration" style="-fx-text-fill: #64748b;"/>
+            </VBox>
+
+            <!-- Metrics Row -->
+            <HBox spacing="16">
+                <VBox styleClass="metric-box" HBox.hgrow="ALWAYS">
+                    <Label text="Active Restaurants" styleClass="section-title"/>
+                    <Label fx:id="restaurantCountLabel" text="-" styleClass="metric-number"/>
+                </VBox>
+                <VBox styleClass="metric-box" HBox.hgrow="ALWAYS">
+                    <Label text="Orders Placed" styleClass="section-title"/>
+                    <Label fx:id="orderCountLabel" text="-" styleClass="metric-number"/>
+                </VBox>
+                <VBox styleClass="metric-box" HBox.hgrow="ALWAYS">
+                    <Label text="Delivery Batches" styleClass="section-title"/>
+                    <Label fx:id="batchCountLabel" text="-" styleClass="metric-number"/>
+                </VBox>
+                <VBox styleClass="metric-box" HBox.hgrow="ALWAYS">
+                    <Label text="Active Surplus Listings" styleClass="section-title"/>
+                    <Label fx:id="surplusCountLabel" text="-" styleClass="metric-number"/>
+                </VBox>
+            </HBox>
+
+            <!-- Quick Management Actions Grid -->
+            <Label text="Management Consoles" styleClass="section-title"/>
+            <GridPane hgap="16" vgap="16">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="33.3"/>
+                    <ColumnConstraints percentWidth="33.3"/>
+                    <ColumnConstraints percentWidth="33.3"/>
+                </columnConstraints>
+
+                <VBox styleClass="card" spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="🍽️ Restaurant Management" styleClass="section-title"/>
+                    <Label text="Configure dining partners, operating hours, and locations." wrapText="true" style="-fx-text-fill: #64748b;"/>
+                    <Button text="Open Restaurants" onAction="#goRestaurants" styleClass="btn-secondary"/>
+                </VBox>
+
+                <VBox styleClass="card" spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="🍱 Menu &amp; Inventory" styleClass="section-title"/>
+                    <Label text="Update menu items, pricing, veg status, and stock levels." wrapText="true" style="-fx-text-fill: #64748b;"/>
+                    <Button text="Open Menu Editor" onAction="#goMenus" styleClass="btn-secondary"/>
+                </VBox>
+
+                <VBox styleClass="card" spacing="8" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <Label text="📦 Order Dispatching" styleClass="section-title"/>
+                    <Label text="Monitor orders and execute state machine transitions." wrapText="true" style="-fx-text-fill: #64748b;"/>
+                    <Button text="Open Order Manager" onAction="#goOrders" styleClass="btn-secondary"/>
+                </VBox>
+
+                <VBox styleClass="card" spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label text="🚚 Delivery Batching" styleClass="section-title"/>
+                    <Label text="Run concurrency-safe batching cycles to bundle campus orders." wrapText="true" style="-fx-text-fill: #64748b;"/>
+                    <Button text="Open Batching Engine" onAction="#goBatches" styleClass="btn-secondary"/>
+                </VBox>
+
+                <VBox styleClass="card" spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label text="♻️ Surplus Marketplace" styleClass="section-title"/>
+                    <Label text="Manage discounted excess meals and auto-expiry scheduler." wrapText="true" style="-fx-text-fill: #64748b;"/>
+                    <Button text="Open Surplus Manager" onAction="#goSurplus" styleClass="btn-secondary"/>
+                </VBox>
+
+                <VBox styleClass="card" spacing="8" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <Label text="👥 Campus Group Orders" styleClass="section-title"/>
+                    <Label text="Inspect collaborative carts, group deadlines, and bill breakdown." wrapText="true" style="-fx-text-fill: #64748b;"/>
+                    <Button text="Open Group Orders" onAction="#goGroupOrders" styleClass="btn-secondary"/>
+                </VBox>
+            </GridPane>
+        </VBox>
+    </ScrollPane>
+</VBox>

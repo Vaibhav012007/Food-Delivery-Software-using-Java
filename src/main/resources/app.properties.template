@@ -1,0 +1,26 @@
+# Copy this file to app.properties and fill in your actual values.
+# NEVER commit app.properties to version control.
+
+# MySQL connection
+db.url=jdbc:mysql://localhost:3306/foodxpress?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+db.username=root
+db.password=YOUR_MYSQL_PASSWORD
+
+# Connection pool settings (HikariCP)
+db.pool.maximumPoolSize=10
+db.pool.minimumIdle=2
+db.pool.connectionTimeout=30000
+db.pool.idleTimeout=600000
+db.pool.maxLifetime=1800000
+
+# Application settings
+app.name=FoodXpress
+app.baseUrl=http://localhost:8080/FoodApp
+
+# Delivery batching (seconds between runs)
+batch.interval.seconds=60
+batch.max.size=5
+batch.max.wait.minutes=10
+
+# Surplus expiry check (seconds between runs)
+surplus.expiry.interval.seconds=300

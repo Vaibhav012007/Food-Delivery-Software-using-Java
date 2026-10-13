@@ -1,0 +1,25 @@
+# Sensitive files — NEVER commit credentials
+src/main/resources/app.properties
+
+# Maven
+target/
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# IntelliJ
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

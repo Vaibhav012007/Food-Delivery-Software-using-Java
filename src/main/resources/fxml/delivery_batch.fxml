@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.app.desktop.DeliveryBatchController"
+      spacing="0" stylesheets="@../css/desktop.css">
+
+    <!-- Top Navigation Bar -->
+    <HBox styleClass="nav-bar">
+        <Label text="FoodXpress Admin" styleClass="brand-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Dashboard" styleClass="nav-button" onAction="#goDashboard"/>
+        <Button text="Restaurants" styleClass="nav-button" onAction="#goRestaurants"/>
+        <Button text="Menus" styleClass="nav-button" onAction="#goMenus"/>
+        <Button text="Orders" styleClass="nav-button" onAction="#goOrders"/>
+        <Button text="Batches" styleClass="nav-button" onAction="#goBatches"/>
+        <Button text="Surplus" styleClass="nav-button" onAction="#goSurplus"/>
+        <Button text="Group Orders" styleClass="nav-button" onAction="#goGroupOrders"/>
+        <Button text="Sign Out" styleClass="btn-secondary" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="20" right="24" bottom="20" left="24"/>
+        </padding>
+
+        <!-- Left Batches Table -->
+        <VBox spacing="12" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label text="Delivery Batching Engine" styleClass="page-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="⚡ Run Batching Cycle" onAction="#handleRunBatching" styleClass="btn-primary"/>
+                <Button text="🔄 Refresh" onAction="#loadBatches" styleClass="btn-secondary"/>
+            </HBox>
+
+            <Label fx:id="statusMessage" text="" wrapText="true" visible="false"/>
+
+            <TableView fx:id="batchTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="idCol" text="Batch ID" prefWidth="80"/>
+                    <TableColumn fx:id="restaurantCol" text="Restaurant ID" prefWidth="100"/>
+                    <TableColumn fx:id="statusCol" text="Batch Status" prefWidth="120"/>
+                    <TableColumn fx:id="maxSizeCol" text="Max Size" prefWidth="80"/>
+                    <TableColumn fx:id="createdCol" text="Created Time" prefWidth="160"/>
+                    <TableColumn fx:id="dispatchedCol" text="Dispatched Time" prefWidth="160"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <!-- Right Side: Batch Details & Dispatch -->
+        <VBox styleClass="card" spacing="16" prefWidth="320">
+            <Label text="Batch Details" styleClass="section-title"/>
+
+            <VBox spacing="4">
+                <Label text="Selected Batch:"/>
+                <Label fx:id="selectedBatchLabel" text="None selected" style="-fx-font-weight: bold;"/>
+            </VBox>
+
+            <Button text="Dispatch Batch" fx:id="dispatchButton" onAction="#handleDispatch" styleClass="btn-primary" maxWidth="Infinity" disable="true"/>
+
+            <Separator/>
+
+            <Label text="Orders in this Batch" styleClass="section-title"/>
+            <ListView fx:id="batchOrdersList" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </HBox>
+</VBox>

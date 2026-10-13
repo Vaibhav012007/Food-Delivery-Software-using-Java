@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.app.desktop.GroupOrderController"
+      spacing="0" stylesheets="@../css/desktop.css">
+
+    <!-- Top Navigation Bar -->
+    <HBox styleClass="nav-bar">
+        <Label text="FoodXpress Admin" styleClass="brand-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Dashboard" styleClass="nav-button" onAction="#goDashboard"/>
+        <Button text="Restaurants" styleClass="nav-button" onAction="#goRestaurants"/>
+        <Button text="Menus" styleClass="nav-button" onAction="#goMenus"/>
+        <Button text="Orders" styleClass="nav-button" onAction="#goOrders"/>
+        <Button text="Batches" styleClass="nav-button" onAction="#goBatches"/>
+        <Button text="Surplus" styleClass="nav-button" onAction="#goSurplus"/>
+        <Button text="Group Orders" styleClass="nav-button" onAction="#goGroupOrders"/>
+        <Button text="Sign Out" styleClass="btn-secondary" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="20" right="24" bottom="20" left="24"/>
+        </padding>
+
+        <!-- Left Table: Open Groups -->
+        <VBox spacing="12" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label text="Campus Group Orders" styleClass="page-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="🔄 Refresh" onAction="#loadGroups" styleClass="btn-secondary"/>
+            </HBox>
+
+            <Label fx:id="statusMessage" text="" wrapText="true" visible="false"/>
+
+            <TableView fx:id="groupTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="idCol" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="creatorCol" text="Host User ID" prefWidth="90"/>
+                    <TableColumn fx:id="restaurantCol" text="Restaurant ID" prefWidth="90"/>
+                    <TableColumn fx:id="inviteCodeCol" text="Invite Code" prefWidth="110"/>
+                    <TableColumn fx:id="deadlineCol" text="Deadline" prefWidth="160"/>
+                    <TableColumn fx:id="statusCol" text="Status" prefWidth="90"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <!-- Right Side: Details & Actions -->
+        <VBox styleClass="card" spacing="14" prefWidth="340">
+            <Label text="Group Cart &amp; Members" styleClass="section-title"/>
+
+            <VBox spacing="4">
+                <Label text="Selected Group:"/>
+                <Label fx:id="selectedGroupLabel" text="None selected" style="-fx-font-weight: bold;"/>
+            </VBox>
+
+            <Label text="Collaborative Cart Items:"/>
+            <ListView fx:id="cartItemsList" prefHeight="140"/>
+
+            <Label text="Member Subtotals:"/>
+            <ListView fx:id="memberTotalsList" prefHeight="100"/>
+
+            <Button text="Simulate Host Checkout" fx:id="checkoutButton" onAction="#handleCheckout" styleClass="btn-primary" maxWidth="Infinity" disable="true"/>
+
+            <Separator/>
+
+            <Label text="Start New Group Order" styleClass="section-title"/>
+            <HBox spacing="10">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Host User ID:"/>
+                    <TextField fx:id="hostUserIdInput" text="2"/>
+                </VBox>
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Restaurant ID:"/>
+                    <TextField fx:id="restaurantIdInput" text="1"/>
+                </VBox>
+            </HBox>
+            <Button text="+ Create Group" onAction="#handleCreateGroup" styleClass="btn-secondary" maxWidth="Infinity"/>
+        </VBox>
+    </HBox>
+</VBox>
